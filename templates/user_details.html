@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}User Home Page{% endblock %}
+{% block content %}
+<h1>Welcome back to {{user.username}}'s page!</h1>
+<p>Hey {{user.first_name}} {{user.last_name}}. Thanks for signing up
+    with us using the email address {{user.email}}.
+</p>
+
+{% for info in feedback %}
+<div class='user-deets'>
+    <a href="/feedback/{{info.id}}/update">{{info.title}}</a>
+    <p>{{info.content}}</p>
+    <form action="/feedback/{{info.id}}/delete" method="post">
+        <input class="btn" type="submit" value="Delete">
+    </form>
+</div>
+{% endfor %}
+<a href="/users/{{user.username}}/feedback/add">Add additional feedback</a><br>
+<form action="/users/{{user.username}}/delete" method="post">
+    <input class="btn" type="submit" value="Delete user">
+</form>
+{% endblock %}
